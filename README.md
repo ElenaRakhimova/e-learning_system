@@ -49,32 +49,32 @@
    id_user INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY
    ```
    - Генерация уникальных идентификаторов без ручного определения id.
-5. Внешние ключи
+4. Внешние ключи
    ```
    id_user INT NOT NULL REFERENCES users(id_user) ON DELETE CASCADE
    ```
    - При удалении основной записи автоматически удаляются связанные.
-7. Индексы
+5. Индексы
    ```
    CREATE INDEX idx_users_role ON users(role_name);
    ```
    - Ускорение выполнения запросов SELECT, JOIN, WHERE.
-9. Составные ключи
+6. Составные ключи
     ```
     PRIMARY KEY (id_teacher, id_division)
     ```
     - Обеспечение уникальности значений в связующих таблицах.
-11. Уникальные ограничения (UNIQUE)
+7. Уникальные ограничения (UNIQUE)
     ```
     UNIQUE (id_user)
     ```
     - Запрет дублирования значений в указанных столбцах.
-13. CHECK-ограничения
+8. CHECK-ограничения
     ```
     course_number INT NOT NULL CHECK (course_number BETWEEN 1 AND 6)
     ```
     - Проверка допустимости значений.
-15. Генерируемые столбцы (GENERATED ALWAYS AS)
+9. Генерируемые столбцы (GENERATED ALWAYS AS)
     ```
     percentage NUMERIC(5,2) GENERATED ALWAYS AS (
         CASE WHEN max_score = 0 THEN 0 
@@ -83,33 +83,33 @@
     ) STORED
     ```
     - Автоматический расчет значения.
-17. TIMESTAMP и TIMESTAMPTZ (дата и время)
+10. TIMESTAMP и TIMESTAMPTZ (дата и время)
     ```
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     ```
     - Использование временных меток с часовым поясом.
-19. INTERVAL — разница времени
+11. INTERVAL — разница времени
     ```
     time_spent INTERVAL GENERATED ALWAYS AS (
         finished_at - started_at
     ) STORED
     ```
     - Автоматический подсчёт времени выполнения теста.
-21. DEFAULT значения
+12. DEFAULT значения
     ```
     status application_status NOT NULL DEFAULT 'На рассмотрении'
     ```
     - Значения по умолчанию.
-23. BOOLEAN-поля
+13. BOOLEAN-поля
     ```
     notification_new_task BOOLEAN DEFAULT TRUE
     ```
     - Хранение состояний "да/нет" и "включено/выключено".
-25. Модульная структура
+14. Модульная структура
 - Курсы состоят из модулей `course_module`, которые содержат материалы, задания, тесты.
-27. Разграничение ролей
+15. Разграничение ролей
 - Через ENUM `user_role` и отдельные таблицы: `student`, `teacher`, `auditor`, `administrator`.
-29. Архивирование
+16. Архивирование
 - Таблица `course_archive`, позволяющая привязывать курсы к архивным учебным годам.
 
 ## ER-диаграмма
