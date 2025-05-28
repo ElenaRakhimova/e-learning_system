@@ -39,7 +39,7 @@
 Все таблицы имеют внешние ключи, ограничения и уникальные индексы.
 
 ## Технологии
-1. Типы ENUM (перечисления)
+1. Типы ENUM — перечисления
    ```
    CREATE TYPE user_role AS ENUM ('Администратор', 'Студент', 'Преподаватель', 'Вольнослушатель');
    ```
@@ -74,7 +74,7 @@
     course_number INT NOT NULL CHECK (course_number BETWEEN 1 AND 6)
     ```
     - Проверка допустимости значений.
-9. Генерируемые столбцы (GENERATED ALWAYS AS)
+9. Генерируемые столбцы
     ```
     percentage NUMERIC(5,2) GENERATED ALWAYS AS (
         CASE WHEN max_score = 0 THEN 0 
@@ -83,7 +83,7 @@
     ) STORED
     ```
     - Автоматический расчет значения.
-10. TIMESTAMP и TIMESTAMPTZ (дата и время)
+10. TIMESTAMP и TIMESTAMPTZ — дата и время
     ```
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
     ```
